@@ -9,11 +9,11 @@ import { calculaFatorCorrecaoFinal } from './lib/calculaFatorCorrecaoFinal'
 import { dijuntores } from './lib/dijuntores'
 
 const metodo = 'B1'
-const potencia = 2200
+const potencia = 7500
 const VOLTAGEM = 220
 const temperaturaAmbiente = 40
-const numeroCircuitos = 3
-const proximoCabo = 3
+const numeroCircuitos = 1
+const proximoCabo = 1
 
 const title = `Potência: ${potencia}W a ${VOLTAGEM}V`
 console.log(`Título: ${title} | Método: ${metodo}`)
