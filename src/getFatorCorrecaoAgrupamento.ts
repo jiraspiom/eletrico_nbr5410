@@ -8,6 +8,12 @@ const FCA: FatorCorrecaoAgrupamento[] = [
   { circuito: 1, fator: 1 },
   { circuito: 2, fator: 0.8 },
   { circuito: 3, fator: 0.7 },
+  { circuito: 4, fator: 0.7 },
+  { circuito: 5, fator: 0.7 },
+  { circuito: 6, fator: 0.7 },
+  { circuito: 7, fator: 0.65 },
+  { circuito: 8, fator: 0.65 },
+  { circuito: 9, fator: 0.65 },
 ]
 
 export function getFatorCorrecaoAgrupamentoByCircuito(
