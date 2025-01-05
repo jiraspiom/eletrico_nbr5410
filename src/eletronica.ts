@@ -3,6 +3,9 @@
 import { getFatorCorrecaoAgrupamentoByCircuito } from './getFatorCorrecaoAgrupamento'
 import { getFatorCorrecaoTemperaturaByTemperaturaAmbiente } from './getFatorCorrecaoTemperatura'
 import { getSessaoNominalbyAperes } from './getSessaoNominalbyAperes'
+import { calcularAmperagem } from './lib/calculaAmperagem'
+import { calculaCapacidadeAjustada } from './lib/calculaCapacidadeAjustada'
+import { calculaFatorCorrecaoFinal } from './lib/calculaFatorCorrecaoFinal'
 
 const metodo = 'B1'
 const potencia = 5500
@@ -13,9 +16,6 @@ const proximoCabo = 1
 
 const title = `Potência: ${potencia}W a ${VOLTAGEM}V`
 console.log(`Título: ${title} | Método: ${metodo}`)
-
-const calcularAmperagem = (potencia: number, voltagem: number): number =>
-  Math.round((potencia / voltagem) * 100) / 100
 
 const amperagem = calcularAmperagem(potencia, VOLTAGEM)
 console.log(`Amperagem calculada: ${amperagem}A`)
@@ -54,12 +54,19 @@ if (!fatorAgrupamento) {
 }
 
 // Cálculo do fator de correção final
-const fatorCorrecaoFinal = fatorTemperatura?.pvc * fatorAgrupamento?.fator
+const fatorCorrecaoFinal = calculaFatorCorrecaoFinal(
+  fatorTemperatura.pvc,
+  fatorAgrupamento.fator
+)
 console.log(`Fator de correção total: ${fatorCorrecaoFinal}`)
 
 //fator de correcao * amperes do cabo
 // Ajuste da capacidade do cabo considerando o fator de correção
-const capacidadeAjustada = fatorCorrecaoFinal * cabo?.a
+const capacidadeAjustada = calculaCapacidadeAjustada(
+  fatorCorrecaoFinal,
+  cabo?.a
+)
+
 console.log(`Capacidade ajustada do cabo: ${capacidadeAjustada.toFixed(2)}A`)
 console.log(
   `Amperage calculada: o cabo de ${cabo?.mm}mm agora nao suporta mais ${cabo?.a}A, e sim ${capacidadeAjustada.toFixed(2)}A`
