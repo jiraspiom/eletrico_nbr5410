@@ -18,6 +18,11 @@ export function getFatorCorrecaoAgrupamentoByCircuito(
     return null
   }
 
+  if (numeroCircuito > 3) {
+    console.warn('Número do circuito inválido. Deve ser menor ou igual a 3.')
+    return null
+  }
+
   const fatorCorrecao = FCA.find(f => f.circuito === numeroCircuito)
 
   if (!fatorCorrecao) {
